@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Ritmo Cardíaco</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+        }
+        .calculator h2 {
+            margin-bottom: 20px;
+        }
+        .calculator p, .calculator ol {
+            text-align: left;
+        }
+        .calculator input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .calculator button {
+            padding: 10px;
+            width: 100%;
+            background: #007bff;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .calculator button:hover {
+            background: #0056b3;
+        }
+        .calculator .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <h2>Calculadora de Ritmo Cardíaco</h2>
+        <p>Para calcular tu ritmo cardíaco:</p>
+        <ol>
+            <li>Encuentra tu pulso en la muñeca o el cuello.</li>
+            <li>Cuenta el número de latidos en 15 segundos.</li>
+            <li>Multiplica el número de latidos por 4 para obtener tu ritmo cardíaco en latidos por minuto (bpm).</li>
+        </ol>
+        <label for="beats">Número de latidos en 15 segundos:</label>
+        <input type="number" id="beats" placeholder="Ingresa el número de latidos">
+        <button onclick="calculateHeartRate()">Calcular Ritmo Cardíaco</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateHeartRate() {
+            const beats = document.getElementById('beats').value;
+            const heartRate = beats * 4;
+            let resultText;
+
+            if (!isNaN(heartRate) && heartRate > 0) {
+                if (heartRate < 60) {
+                    resultText = `Tu ritmo cardíaco es ${heartRate} bpm. Esto se considera bradicardia (ritmo cardíaco lento). Es recomendable consultar a un médico.`;
+                } else if (heartRate >= 60 && heartRate <= 100) {
+                    resultText = `Tu ritmo cardíaco es ${heartRate} bpm. Esto está dentro del rango normal.`;
+                } else {
+                    resultText = `Tu ritmo cardíaco es ${heartRate} bpm. Esto se considera taquicardia (ritmo cardíaco rápido). Es recomendable consultar a un médico.`;
+                }
+            } else {
+                resultText = `Por favor, ingresa un número válido de latidos.`;
+            }
+
+            document.getElementById('result').innerText = resultText;
+        }
+    </script>
+
+</body>
+</html>
